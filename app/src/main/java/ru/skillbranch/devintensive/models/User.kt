@@ -32,8 +32,6 @@ companion object Factory {
       val lastName =  parts?.getOrNull(1)
       return User(id="$lastId", firstName = firstName, lastName = lastName )
   }
-
-
 }
 
 }
