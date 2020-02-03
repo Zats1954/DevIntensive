@@ -9,10 +9,16 @@ object Utils {
     }
 
     fun transliteration(payload: String, divider:String = " "): String {
+        val parts : List<String>? = payload?.split(divider)
+
       return "Stroka"
     }
 
-    fun toInitials(firstName: String?, lastName: String?): String? {
-        return "S.T."
+    fun toInitials(fullName: String?): String? {
+        val (firstName, lastName) = parseFullName(fullName)
+        val  firstIn: Char? = firstName?.get(0)
+        val  lastIn: Char? = lastName?.get(0)
+        return "$firstIn.$lastIn."
     }
+
 }

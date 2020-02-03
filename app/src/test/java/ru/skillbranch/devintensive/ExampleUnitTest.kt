@@ -8,6 +8,7 @@ import ru.skillbranch.devintensive.extensions.add
 import ru.skillbranch.devintensive.extensions.format
 import ru.skillbranch.devintensive.extensions.toUserView
 import ru.skillbranch.devintensive.models.*
+import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
 /**
@@ -62,9 +63,9 @@ class ExampleUnitTest {
     @Test
     fun test_copy1() {
         val user = User.makeUser("John Wick")
-        var user2 = user.copy(lastVisit = Date().add(-2, TimeUnits.SECONDS))
-        var user3 = user.copy(lastName = "Cena", lastVisit = Date().add(2,TimeUnits.HOUR))
-        var user4 = user.copy(lastName = "Cena", lastVisit = Date())
+        val user2 = user.copy(lastVisit = Date().add(-2, TimeUnits.SECONDS))
+        val user3 = user.copy(lastName = "Cena", lastVisit = Date().add(2,TimeUnits.HOUR))
+        val user4 = user.copy(lastName = "Cena", lastVisit = Date())
         print("""
         ${user.lastVisit?.format() } 
         ${user2.lastVisit?.format()}   
@@ -85,10 +86,12 @@ class ExampleUnitTest {
     @Test
     fun test_abstract_factory() {
         val user = User.makeUser("Michel Mikheev")
+        user.lastVisit = Date().add(-2, TimeUnits.DAY)
         val txtMessage = BaseMessage.makeMessage(user, Chat("0"),payload = "any text message", type= "text")
         val imgMessage = BaseMessage.makeMessage(user, Chat("0"),payload = "any image url", type= "image")
            println(txtMessage.formatMessage())
            println(imgMessage.formatMessage())
+           println(Utils.toInitials("Michel Mikheev"))
 
     }
 }

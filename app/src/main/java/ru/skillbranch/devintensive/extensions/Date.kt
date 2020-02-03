@@ -1,6 +1,10 @@
 package ru.skillbranch.devintensive.extensions
 
+import java.math.BigInteger
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.Period
+import java.time.ZoneId
 import java.util.*
 
 const val SECONDS = 1000L
@@ -20,13 +24,21 @@ fun Date.add(value:Int, units:TimeUnits ):Date{
       TimeUnits.HOUR -> value * HOUR
       TimeUnits.DAY -> value * DAY
     }
+
     this.time = time
     return this
 }
 
-fun Date.humanizeDiff(date:Date = Date()): String {
- return date.toString()
+fun Date.humanizeDiff(date:Date? ): String {
+    val newDate:Date = Date()
+    val period = Period.between(date?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDate(),
+                                        newDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+    val message: String = "Последнее посещение было " + period.days
+
+// return date.toString()
+    return message
 }
+
 
 enum class TimeUnits{
     SECONDS,
