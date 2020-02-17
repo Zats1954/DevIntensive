@@ -9,9 +9,10 @@ object Utils {
     }
 
     fun transliteration(payload: String, divider:String = " "): String {
-        val parts : List<String>? = payload?.split(divider)
-
-      return "Stroka"
+        var parts : List<String>? = payload?.split(divider)
+        var newString: String =""
+        parts?.forEach{newString += it }
+      return newString
     }
 
     fun toInitials(fullName: String?): String? {

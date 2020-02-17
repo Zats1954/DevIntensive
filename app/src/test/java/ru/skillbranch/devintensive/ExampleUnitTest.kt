@@ -8,6 +8,7 @@ import ru.skillbranch.devintensive.extensions.add
 import ru.skillbranch.devintensive.extensions.format
 import ru.skillbranch.devintensive.extensions.toUserView
 import ru.skillbranch.devintensive.models.*
+import ru.skillbranch.devintensive.models.User.UserBuilder
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
@@ -77,21 +78,35 @@ class ExampleUnitTest {
     @Test
     fun data_mapping() {
         val user = User.makeUser("John Wick")
-        print(user)
         val userView = user.toUserView()
         userView.printMe()
-
     }
 
     @Test
     fun test_abstract_factory() {
-        val user = User.makeUser("Michel Mikheev")
-        user.lastVisit = Date().add(-2, TimeUnits.DAY)
+        val user = UserBuilder("Michel Mikheev")
+            .setlastVisit(Date().add(-32, TimeUnits.DAY))
+            .build()
         val txtMessage = BaseMessage.makeMessage(user, Chat("0"),payload = "any text message", type= "text")
         val imgMessage = BaseMessage.makeMessage(user, Chat("0"),payload = "any image url", type= "image")
            println(txtMessage.formatMessage())
            println(imgMessage.formatMessage())
            println(Utils.toInitials("Michel Mikheev"))
+           println(Utils.transliteration("Michel Ivanovich Mikheev"))
+    }
 
+    @Test
+    fun test_period() {
+        var user = UserBuilder("Michel Mikheev")
+            .setlastVisit(Date().add(0, TimeUnits.DAY))
+            .build()
+        var imgMessage: BaseMessage
+        for (i in 0 downTo -150){
+            user =  UserBuilder("Michel Mikheev")
+                .setlastVisit(Date().add(i, TimeUnits.DAY))
+                .build()
+            imgMessage = BaseMessage.makeMessage(user, Chat("0"),payload = "any image url", type= "image")
+            println(imgMessage.formatMessage())
+        }
     }
 }
