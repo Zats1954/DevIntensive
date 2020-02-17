@@ -94,19 +94,4 @@ class ExampleUnitTest {
            println(Utils.toInitials("Michel Mikheev"))
            println(Utils.transliteration("Michel Ivanovich Mikheev"))
     }
-
-    @Test
-    fun test_period() {
-        var user = UserBuilder("Michel Mikheev")
-            .setlastVisit(Date().add(0, TimeUnits.DAY))
-            .build()
-        var imgMessage: BaseMessage
-        for (i in 0 downTo -150){
-            user =  UserBuilder("Michel Mikheev")
-                .setlastVisit(Date().add(i, TimeUnits.DAY))
-                .build()
-            imgMessage = BaseMessage.makeMessage(user, Chat("0"),payload = "any image url", type= "image")
-            println(imgMessage.formatMessage())
-        }
-    }
 }
