@@ -8,10 +8,9 @@ object Utils {
         return firstName to lastName
     }
 
-    fun transliteration(payload: String, divider:String = " "): String {
-        var parts : List<String>? = payload?.split(divider)
-        var newString: String =""
-        parts?.forEach{newString += it }
+    fun transliteration(payload: String): String {
+        val myRegEx: Regex = """[^a-zA-Z]*""".toRegex()
+        val newString:String = myRegEx.replace(payload, "")
       return newString
     }
 
@@ -22,4 +21,19 @@ object Utils {
         return "$firstIn.$lastIn."
     }
 
+    fun truncate(oldString:String?, countSimbols:Int):String?{
+        if(oldString.isNullOrEmpty())
+            return null
+        if(oldString.length <= countSimbols)
+
+            return oldString
+        else
+            return  oldString.substring(0,countSimbols) +"..."
+    }
+
+    fun stripHtml(oldString:String):String{
+        val myRegEx: Regex = """<[^>]*>""".toRegex()
+        val newString:String = myRegEx.replace(oldString, "\n ")
+        return newString
+    }
 }

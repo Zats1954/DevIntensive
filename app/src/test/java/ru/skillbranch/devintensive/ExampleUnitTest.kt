@@ -1,7 +1,7 @@
 package ru.skillbranch.devintensive
 
-import org.junit.Test
 
+import org.junit.Test
 import org.junit.Assert.*
 import ru.skillbranch.devintensive.extensions.TimeUnits
 import ru.skillbranch.devintensive.extensions.add
@@ -10,7 +10,8 @@ import ru.skillbranch.devintensive.extensions.toUserView
 import ru.skillbranch.devintensive.models.*
 import ru.skillbranch.devintensive.models.User.UserBuilder
 import ru.skillbranch.devintensive.utils.Utils
-import java.util.*
+import java.util.Date
+
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -92,6 +93,8 @@ class ExampleUnitTest {
            println(txtMessage.formatMessage())
            println(imgMessage.formatMessage())
            println(Utils.toInitials("Michel Mikheev"))
-           println(Utils.transliteration("Michel Ivanovich Mikheev"))
+           println(Utils.transliteration("Michel325 Ivanovich+- Mikheev"))
+           println(Utils.truncate("Michel Ivanovich Mikheev", 8))
+           println(Utils.stripHtml("<html> <body style=\"width=24px\"> <table> <tr><td>Kitchen</td><td>Sleeproom</td></tr><table></body></html>"))
     }
 }
