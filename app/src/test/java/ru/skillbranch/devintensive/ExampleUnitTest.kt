@@ -3,10 +3,7 @@ package ru.skillbranch.devintensive
 
 import org.junit.Test
 import org.junit.Assert.*
-import ru.skillbranch.devintensive.extensions.TimeUnits
-import ru.skillbranch.devintensive.extensions.add
-import ru.skillbranch.devintensive.extensions.format
-import ru.skillbranch.devintensive.extensions.toUserView
+import ru.skillbranch.devintensive.extensions.*
 import ru.skillbranch.devintensive.models.*
 import ru.skillbranch.devintensive.models.User.UserBuilder
 import ru.skillbranch.devintensive.utils.Utils
@@ -65,7 +62,7 @@ class ExampleUnitTest {
     @Test
     fun test_copy1() {
         val user = User.makeUser("John Wick")
-        val user2 = user.copy(lastVisit = Date().add(-2, TimeUnits.SECONDS))
+        val user2 = user.copy(lastVisit = Date().add(-2, TimeUnits.SECOND))
         val user3 = user.copy(lastName = "Cena", lastVisit = Date().add(2,TimeUnits.HOUR))
         val user4 = user.copy(lastName = "Cena", lastVisit = Date())
         print("""
@@ -86,15 +83,27 @@ class ExampleUnitTest {
     @Test
     fun test_abstract_factory() {
         val user = UserBuilder("Michel Mikheev")
-            .setlastVisit(Date().add(-32, TimeUnits.DAY))
+            .lastVisit(Date().add(-32, TimeUnits.DAY))
             .build()
         val txtMessage = BaseMessage.makeMessage(user, Chat("0"),payload = "any text message", type= "text")
         val imgMessage = BaseMessage.makeMessage(user, Chat("0"),payload = "any image url", type= "image")
+           println(Utils.parseFullName(" "))
            println(txtMessage.formatMessage())
            println(imgMessage.formatMessage())
-           println(Utils.toInitials("Michel Mikheev"))
-           println(Utils.transliteration("Michel325 Ivanovich+- Mikheev"))
-           println(Utils.truncate("Michel Ivanovich Mikheev", 8))
+           println(Utils.toInitials("michel mikheev"))
+           println(Utils.transliteration("Michel325 Иванович+- Шукарь"))
+           println(Utils.transliteration("Michel325 Иванович+- Шукарь","_"))
+           println(("Michel Ivanovich Mikheev".truncate()))
            println(Utils.stripHtml("<html> <body style=\"width=24px\"> <table> <tr><td>Kitchen</td><td>Sleeproom</td></tr><table></body></html>"))
+    }
+
+    @Test
+    fun test_date() {
+        println(Date().add(-2, TimeUnits.HOUR).humanizeDiff()) //2 часа назад
+        println(Date().add(-5, TimeUnits.DAY).humanizeDiff()  )  //5 дней назад)
+        println(Date().add(2, TimeUnits.MINUTE).humanizeDiff())     //через 2 минуты)
+        println(Date().add(7, TimeUnits.DAY).humanizeDiff()   )   //через 7 дней)
+        println(Date().add(-400, TimeUnits.DAY).humanizeDiff())     //более года назад)
+        println(Date().add(400, TimeUnits.DAY).humanizeDiff() )     //более чем через год)
     }
 }
