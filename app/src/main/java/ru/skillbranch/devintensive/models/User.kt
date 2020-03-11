@@ -24,7 +24,7 @@ data class User (
         println("It's Alive!!!\n ${if(lastName === "Doe") "His name is $firstName $lastName\n" 
                 else "And name is $firstName $lastName!!\n"} ")
     }
-    data class UserBuilder(val fullName:String?) {
+    data class Builder(val fullName:String?) {
         val user:User = makeUser(fullName)
         fun  id(id:String)               = apply {user.id = id}
         fun  firstName(firstName:String) = apply {user.firstName = firstName}
