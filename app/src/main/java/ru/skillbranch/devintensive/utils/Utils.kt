@@ -69,12 +69,4 @@ object Utils {
                 return "$firstIn$lastIn"
         }
     }
-
-    fun stripHtml(oldString: String): String {
-        val myRegEx: Regex = """<[^>]*>""".toRegex()
-        val newString: String = myRegEx.replace(oldString, "\n ")
-        return newString
-    }
-
-
 }
