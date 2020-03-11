@@ -42,16 +42,32 @@ object Utils {
         return newString.toString()
     }
 
-    fun transliteration(payload: String, symbol: String):String {
+    fun transliteration(payload: String, symbol: String): String {
         trans[' '] = symbol
         return transliteration(payload)
     }
 
-    fun toInitials(fullName: String?): String? {
-        val (firstName, lastName) = parseFullName(fullName)
+//    fun toInitials(fullName: String?): String? {
+//        val (firstName, lastName) = parseFullName(fullName)
+//        val firstIn: Char? = firstName?.toUpperCase(Locale.ROOT)?.get(0)
+//        val lastIn: Char? = lastName?.toUpperCase(Locale.ROOT)?.get(0)
+//        return "$firstIn.$lastIn."
+//    }
+
+    fun toInitials(firstName: String?, lastName: String?): String? {
         val firstIn: Char? = firstName?.toUpperCase(Locale.ROOT)?.get(0)
         val lastIn: Char? = lastName?.toUpperCase(Locale.ROOT)?.get(0)
-        return "$firstIn.$lastIn."
+        if (firstIn == null || firstIn == ' ') {
+            if (lastIn == null || lastIn == ' ')
+                return null
+            else
+                return "$lastIn"
+        } else {
+            if (lastIn == null || lastIn == ' ')
+                return "$firstIn"
+            else
+                return "$firstIn$lastIn"
+        }
     }
 
     fun stripHtml(oldString: String): String {
