@@ -1,11 +1,11 @@
 package ru.skillbranch.devintensive
 
 
-import org.junit.Test
 import org.junit.Assert.*
+import org.junit.Test
 import ru.skillbranch.devintensive.extensions.*
 import ru.skillbranch.devintensive.models.*
-import ru.skillbranch.devintensive.models.User.UserBuilder
+import ru.skillbranch.devintensive.models.User.Builder
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.Date
 
@@ -82,7 +82,10 @@ class ExampleUnitTest {
 
     @Test
     fun test_abstract_factory() {
-        val user = UserBuilder("Michel Mikheev")
+        val user = Builder()
+            .id("125")
+            .firstName("Michel")
+            .lastName("Micheev")
             .lastVisit(Date().add(-32, TimeUnits.DAY))
             .build()
         val txtMessage = BaseMessage.makeMessage(user, Chat("0"),payload = "any text message", type= "text")
@@ -90,11 +93,11 @@ class ExampleUnitTest {
            println(Utils.parseFullName(" "))
            println(txtMessage.formatMessage())
            println(imgMessage.formatMessage())
-           println(Utils.toInitials("michel mikheev"))
+           println(Utils.toInitials("hyt", "kugt"))
            println(Utils.transliteration("Michel325 Иванович+- Шукарь"))
            println(Utils.transliteration("Michel325 Иванович+- Шукарь","_"))
            println(("Michel Ivanovich Mikheev".truncate()))
-           println(Utils.stripHtml("<html> <body style=\"width=24px\"> <table> <tr><td>Kitchen</td><td>Sleeproom</td></tr><table></body></html>"))
+           println(("<html> <body style=\"width=24px\"> <table> <tr><td>Kitchen</td><td>Sleeproom with    my    io</td></tr><table></body></html>".stripHtml()))
     }
 
     @Test
@@ -105,5 +108,16 @@ class ExampleUnitTest {
         println(Date().add(7, TimeUnits.DAY).humanizeDiff()   )   //через 7 дней)
         println(Date().add(-400, TimeUnits.DAY).humanizeDiff())     //более года назад)
         println(Date().add(400, TimeUnits.DAY).humanizeDiff() )     //более чем через год)
+    }
+
+    @Test
+    fun test_plural(){
+        println(TimeUnits.SECOND.plural(1))
+        println(TimeUnits.MINUTE.plural(4))
+        println(TimeUnits.HOUR.plural(19))
+        println(TimeUnits.DAY.plural(222))
+
+
+
     }
 }

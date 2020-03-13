@@ -29,13 +29,38 @@ fun Date.add(value: Int, units: TimeUnits): Date {
 }
 
 fun Date.humanizeDiff(date: Date?): String? {
+    val pre: String
+    val po: String
     val newDate = Date()
+    var num = 0
     val delta: Long
-    if (date != null)
+    if (date != null) {
         delta = date.time - newDate.time
+        when (unit) {
+            TimeUnits.SECOND -> {
+                num =(delta / SECONDS).toInt() }
+            TimeUnits.MINUTE -> {
+                num =(delta / MINUTES).toInt()}
+            TimeUnits.HOUR ->{
+                num = (delta/ HOURS).toInt()
+            }
+            TimeUnits.DAY -> {
+                num = (delta / DAYS).toInt()
+                if(num >366)
+                    return unit?.plural(num)
+                }
+    }
+    }
     else
         return null
-    return unit?.plural(delta)
+    if (delta < 0) {
+        pre = "  "
+        po = " назад"
+    } else {
+        pre = "через "
+        po = " "
+    }
+    return pre + unit?.plural(num) + po
 }
 
 fun Date.humanizeDiff(): String? {
@@ -48,26 +73,17 @@ enum class TimeUnits {
     HOUR,
     DAY;
 
-    fun plural(number: Long): String {
+    fun plural(number: Int): String {
         val num: Int
-        val sign: Int
-        val pre: String
-        val po: String
-        var dayString: String
-
+        val dayString: String
+        println("number " + number)
         if (number < 0) {
-            sign = -1
-            pre = "  "
-            po = " назад"
-
+            num = -number
         } else {
-            sign = 1
-            pre = "через "
-            po = " "
+            num = number
         }
         when (this) {
             SECOND -> {
-                num = sign * ((number / SECONDS).toInt())
                 when (num) {
                     0 -> return " сейчас"
                     else -> {
@@ -82,7 +98,6 @@ enum class TimeUnits {
                 }
             }
             MINUTE -> {
-                num = sign * (number / MINUTES).toInt()
                 when (num) {
                     0 -> return " сейчас"
                     else -> {
@@ -97,7 +112,6 @@ enum class TimeUnits {
                 }
             }
             HOUR -> {
-                num = sign * (number / HOURS).toInt()
                 when (num) {
                     0 -> return " сейчас"
                     else -> {
@@ -112,14 +126,13 @@ enum class TimeUnits {
                 }
             }
             DAY -> {
-                num = sign * (number / DAYS).toInt()
                 if (num > 366) {
-                    if (sign > 0)
+                    if (number > 0)
                         return "больше чем через год "
                     else
-                        return "больше года назад "
+                        return "больше года "
                 }
-                when (num) {
+                when (number) {
                     0 -> return " сегодня"
                     else -> {
                         if (num / 10 != 1) {
@@ -134,28 +147,7 @@ enum class TimeUnits {
 
             }
         }
-        dayString = pre + num + dayString + po
-        return dayString
+        return num.toString() + dayString
     }
 }
-
-//fun Date.plural(date: Date?): String {
-//    var period: Int = Date().humanizeDiff(date)
-//    var dayString: String = " дней назад"
-//    when (period) {
-//        0 -> return " сегодня"
-//        1 -> return " вчера"
-//        else -> {
-//            if (period < 0) return " - ошибка даты "
-//            else if (period / 10 != 1) {
-//                dayString = when (period % 10) {
-//                    1 -> " день назад"
-//                    2, 3, 4 -> " дня назад"
-//                    else -> " дней назад"
-//                }
-//            } else dayString = " дней назад"
-//        }
-//    }
-//    return (period.toString() + dayString)
-//}
 
