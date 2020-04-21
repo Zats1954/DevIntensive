@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/profile_bg"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="60dp"
@@ -23,15 +23,15 @@
         app:srcCompat="@drawable/profile_bg" />
 
     <ImageView
-        android:id="@+id/iv_avatar"
+        android:id="@+id/ic_avatar"
         android:layout_width="@dimen/avatar_round_size"
         android:layout_height="@dimen/avatar_round_size"
         android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_bg"
+        app:layout_constraintEnd_toEndOf="@+id/profile_bg"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/profile_bg"
+        app:layout_constraintTop_toTopOf="@+id/profile_bg"
         app:srcCompat="@drawable/avatar_default" />
 
     <TextView
@@ -41,9 +41,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="John Doe"
-        app:layout_constraintEnd_toEndOf="@+id/iv_avatar"
-        app:layout_constraintStart_toStartOf="@+id/iv_avatar"
-        app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+        app:layout_constraintEnd_toEndOf="@+id/ic_avatar"
+        app:layout_constraintStart_toStartOf="@+id/ic_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/ic_avatar" />
 
     <TextView
         android:id="@+id/tv_rank"
@@ -57,14 +57,14 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_nick_name" />
 
     <ImageButton
-        android:id="@+id/btn_switch_theme"
+        android:id="@+id/btn_switch_day_night"
         android:layout_width="@dimen/btn_round_size_40"
         android:layout_height="@dimen/btn_round_size_40"
         android:layout_marginEnd="32dp"
         android:background="@drawable/btn_round_bg"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
-        app:layout_constraintEnd_toStartOf="@id/iv_avatar"
-        app:layout_constraintTop_toTopOf="@+id/iv_avatar"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_avatar"
+        app:layout_constraintEnd_toStartOf="@id/ic_avatar"
+        app:layout_constraintTop_toTopOf="@+id/ic_avatar"
         app:srcCompat="@drawable/ic_switch_day_night" />
 
     <ImageButton
@@ -73,9 +73,9 @@
         android:layout_height="@dimen/btn_round_size_40"
         android:layout_marginStart="32dp"
         android:background="@drawable/btn_round_bg"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
-        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
-        app:layout_constraintTop_toTopOf="@+id/iv_avatar"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_avatar"
+        app:layout_constraintStart_toEndOf="@+id/ic_avatar"
+        app:layout_constraintTop_toTopOf="@+id/ic_avatar"
         app:srcCompat="@drawable/ic_edit_black_24dp" />
 
     <View
@@ -83,10 +83,10 @@
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:background="?attr/colorAccentedSurface"
-        app:layout_constraintEnd_toEndOf="@id/imageView"
+        app:layout_constraintEnd_toEndOf="@id/profile_bg"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_bg" />
 
     <View
         android:id="@+id/view2"
@@ -98,7 +98,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@id/view"
         app:layout_constraintStart_toStartOf="@id/view"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_bg" />
 
     <TextView
         android:id="@+id/tv_rating"
@@ -110,7 +110,7 @@
         android:text="0"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toStartOf="@+id/view2"
-        app:layout_constraintStart_toStartOf="@id/imageView"
+        app:layout_constraintStart_toStartOf="@id/profile_bg"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="@+id/view"
         app:layout_constraintVertical_chainStyle="packed" />
