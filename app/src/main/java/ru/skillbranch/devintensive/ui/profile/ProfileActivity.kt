@@ -51,7 +51,7 @@ class ProfileActivity: AppCompatActivity (){
             isEditMode = !isEditMode
             showCurrentMode(isEditMode)
         }
-        btn_switch_day_night.setOnClickListener({
+        btn_switch_theme.setOnClickListener({
             viewModel.switchTheme()}
         )
 
